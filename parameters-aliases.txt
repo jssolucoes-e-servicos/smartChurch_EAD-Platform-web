@@ -1,0 +1,3 @@
+"SEAD-00": token,
+"SEAD-01": perfil (teacher, studant, amin)
+"SEAD-02": user
