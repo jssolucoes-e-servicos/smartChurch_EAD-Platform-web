@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 
 export function getAPIClient(ctx) {
   const { "SEAD-00": token } = parseCookies(ctx);
-  //const URI = "https://api-smartchurch.jssolucoeseservicos.com.br/api/";
-  const URI = "http://localhost:3111/api";
+  const URI = "https://smartchurch-backend.onrender.com/api/";
+  //const URI = "http://localhost:3111/api";
 
   const api = axios.create({
     baseURL: URI,
