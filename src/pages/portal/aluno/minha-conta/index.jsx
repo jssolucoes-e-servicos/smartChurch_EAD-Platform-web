@@ -17,7 +17,7 @@ import { withSSRAuth } from "~/utils/withSSRAuth";
 import { getAPIClient } from "~/services/axios";
 import { parseCookies } from "nookies";
 
-function Profile() {
+export default function Profile() {
   return (
     <AlunoTemplate>
       <HeaderUser />
