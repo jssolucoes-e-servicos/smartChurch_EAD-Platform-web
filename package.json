@@ -7,8 +7,7 @@
     "node": "16"
   },
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
-    "start:next": "next start",
+    "start": "next start",
     "build": "next build",
     "install:clean": "rm -rf node_modules/ && rm -rf yarn-lock &&  rm -rf package-lock.json && rm -rf .next/ && rm -rf out/ && yarn && yarn dev",
     "dev": "next dev -p 3010"
