@@ -1,8 +1,10 @@
+import { parseCookies } from "nookies";
 import { toast } from "react-toastify";
 import { getAPIClient } from './axios';
 
 
 const api = getAPIClient();
+const { "SEAD-01": profile } = parseCookies();
 
 api.interceptors.response.use(
   function (response) {
@@ -13,9 +15,22 @@ api.interceptors.response.use(
       sessionStorage.clear();
       localStorage.clear();
       toast.error("O tempo de sua seção expirou, faça login novamente.");
+      let destiny;
+      switch (profile) {
+        case "teacher":
+          destiny = '/acesso/professor';
+          break;
+        case "studant":
+          destiny = '/acesso/aluno';
+          break;
+        case "cma":
+          destiny = '/matriculas/cma';
+        default:
+          break;
+      }
       return {
         redirect: {
-          destination: "/acesso",
+          destination: destiny,
           permanent: false,
         }
       }

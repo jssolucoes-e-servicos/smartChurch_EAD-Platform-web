@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 
 export function getAPIClient(ctx) {
   const { "SEAD-00": token } = parseCookies(ctx);
+  const { "SEAD-01": profile } = parseCookies(ctx);
   const URI = "https://smartchurch-backend.onrender.com/api/";
-  //const URI = "http://localhost:3111/api";
 
   const api = axios.create({
     baseURL: URI,
@@ -26,10 +26,23 @@ export function getAPIClient(ctx) {
     function (error) {
       console.error(error);
       if (error.response.status === 401) {
+        let destiny;
+        switch (profile) {
+          case "teacher":
+            destiny = '/acesso/professor';
+            break;
+          case "studant":
+            destiny = '/acesso/aluno';
+            break;
+          case "cma":
+            destiny = '/matriculas/cma';
+          default:
+            break;
+        }
         toast.error("O tempo de sua seção expirou, faça login novamente.");
         return {
           redirect: {
-            destination: "/acesso",
+            destination: destiny,
             permanent: false,
           },
         };

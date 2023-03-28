@@ -129,7 +129,7 @@ export const getServerSideProps = async ctx => {
   const { "SEAD-02": userCookie } = parseCookies(ctx);
   const userData = JSON.parse(userCookie)
   const { data } = await apiClient.get(`studants-on-class/by-studant/${userData.id}`);
-  console.log(data);
+
   const pageData = {
     coursesList: data
   }
