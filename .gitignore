@@ -6,6 +6,7 @@ package-lock.json
 
 # Sentry
 .sentryclirc
+/src/services/axios.jsx
 
 # Sentry
 next.config.original.js
