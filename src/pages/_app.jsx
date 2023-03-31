@@ -1,40 +1,39 @@
 import React from "react";
-import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 import App from "next/app";
 import Head from "next/head";
-import Router from "next/router";
+//import Router from "next/router";
 import { ToastContainer } from 'react-toastify';
 import '../styles/ReactToastify.css';
 import { AuthProvider } from '~/contexts/AuthContext';
 
-import PageChange from "~/components/PageChange";
+//import PageChange from "~/components/PageChange";
 
 import "~/assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "~/assets/css/nextjs-argon-dashboard.css";
 
-Router.events.on("routeChangeStart", (url) => {
-  console.log(`Loading: ${url}`);
+/* Router.events.on("routeChangeStart", () => {
   document.body.classList.add("body-page-transition");
-  ReactDOM.render(
-    <PageChange path={url} />,
+  ReactDOM.render(<PageChange />,
     document.getElementById("page-transition")
   );
 });
 Router.events.on("routeChangeComplete", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");
+  //ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+  //document.body.classList.remove("body-page-transition");
 });
 Router.events.on("routeChangeError", () => {
   ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
   document.body.classList.remove("body-page-transition");
-});
+}); */
 
 export default class MyApp extends App {
   componentDidMount() {
     let comment = document.createComment("");
     document.insertBefore(comment, document.documentElement);
   }
+
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
 
@@ -44,6 +43,7 @@ export default class MyApp extends App {
 
     return { pageProps };
   }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
