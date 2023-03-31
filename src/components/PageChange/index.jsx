@@ -2,7 +2,7 @@ import React from "react";
 
 import { Spinner } from "reactstrap";
 
-export default function PageChange(props) {
+export default function PageChange() {
   return (
     <div>
       <div className="page-transition-wrapper-div">
