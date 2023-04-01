@@ -25,7 +25,7 @@ export default function MyLessonsByClass({ pageData }) {
 
   const [activeNav, setActiveNav] = useState(1);
   const [classData, setClassData] = useState(pageData.lessonsList);
-  const [lessonsList, setLessonsList] = useState(pageData.lessonsList.course.CourseLesson);
+  const [lessonsList, setLessonsList] = useState(pageData.lessonsList.StudantOnLesson);
   const [infoLoad, setInfoLoad] = useState('Nenhum registro');
   const { "SEAD-02": userCookie } = parseCookies();
 
@@ -41,10 +41,10 @@ export default function MyLessonsByClass({ pageData }) {
     setLessonsList([]);
     setInfoLoad('Carregando...');
     try {
-      const { data } = await api.get(`studants-on-class/by-class-tag/${classTag}`);
+      const { data } = await api.get(`studants-on-class/by-class-tag/${userData.id}/${classTag}`);
 
-      if (data.course.CourseLesson.length > 0) {
-        setLessonsList(data.course.CourseLesson);
+      if (data.StudantOnLesson.length > 0) {
+        setLessonsList(data.StudantOnLesson);
       } else {
         setInfoLoad('Nenhum registro');
         setLessonsList([]);
@@ -69,8 +69,8 @@ export default function MyLessonsByClass({ pageData }) {
               <div className="col">
                 <h3 className="mb-0">Aulas disponíveis</h3>
                 <div className="mb-0">
-                  <h5 className="mb-0">Curso: <b>{classData.course.name}</b></h5>
-                  <h5 className="mb-0">Turma: <b>{classData.name}</b></h5>
+                  <h5 className="mb-0">Curso: <b>{classData.class.course.name}</b></h5>
+                  <h5 className="mb-0">Turma: <b>{classData.class.name}</b></h5>
                 </div>
               </div>
               <div className="col text-right">
@@ -97,13 +97,13 @@ export default function MyLessonsByClass({ pageData }) {
               {
                 lessonsList ? (
                   lessonsList.map((item, index) => {
+                    console.log(item)
                     return (
                       <tr key={`item-${item.id}`}>
                         <td>{index + 1}</td>
-                        <td><Link href={`/portal/aluno/meus-cursos/${classTag}/assistir/${item.slug}`}>{item.name}</Link></td>
-                        <td>{item.type}</td>
-                        {/* <td><Link href={`/portal/aluno/meus-cursos/aulas/${item.class.id}`}>{item.class.course.name}</Link></td> */}
-                        <td>{`<< Não Calculado >>`}</td>
+                        <td><Link href={`/portal/aluno/meus-cursos/${classTag}/assistir/${item.slug}`}>{item.lesson?.name}</Link></td>
+                        <td>{item.lesson.type}</td>
+                        <td>{item.eadStatus}</td>
                       </tr>
                     )
                   })
@@ -134,12 +134,11 @@ export const getServerSideProps = async ctx => {
   const apiClient = getAPIClient(ctx);
   const { "SEAD-02": userCookie } = parseCookies(ctx);
   const userData = JSON.parse(userCookie)
-  const { data } = await apiClient.get(`studants-on-class/by-class-tag/${classTag}`);
+  const { data } = await apiClient.get(`studants-on-class/by-class-tag/${userData.id}/${classTag}`);
   const pageData = {
     userCookie: userData,
     lessonsList: data
   }
-
   return {
     props: { pageData },
   }
