@@ -1,4 +1,4 @@
-import React, { useState, useRef, Fragment } from 'react';
+import React, { useState, useRef, Fragment, useEffect } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import {
   Button,
@@ -25,7 +25,16 @@ export default function VideoPlayerYoutube({ data }) {
   const [videoDuration, setVideoDuration] = useState(0);
   const [played, setPlayed] = useState(0);
   const [volume, setVolume] = useState(0.2);
+
   const ref = useRef(null);
+
+  useEffect(() => {
+    setPlayed(0);
+    ref.current.seekTo(parseFloat(0));
+  }, []);
+
+
+
 
   const changePlaying = () => {
     setPlaying(!playing);
@@ -52,7 +61,12 @@ export default function VideoPlayerYoutube({ data }) {
     // open next video
   }
 
+  const handleOnStart = () => {
+    if (played > 0) { setPlayed(0); ref.current.seekTo(parseFloat(0)) }
+  }
+
   const handleDuration = (duration) => {
+    ref.current.seekTo(parseFloat(0))
     setVideoDuration(duration);
   }
 
@@ -62,7 +76,6 @@ export default function VideoPlayerYoutube({ data }) {
 
   const handleProgress = state => {
     setPlayed(state.played);
-    console.log(state);
   }
 
 
@@ -147,6 +160,7 @@ export default function VideoPlayerYoutube({ data }) {
               key={data.videoIdentify}
               url={`https://www.youtube.com/watch?v=${data.videoIdentify}`}
               playing={playing}
+              onStart={handleOnStart}
               onEnded={handleEnded}
               onError={e => console.log('onError', e)}
               onProgress={handleProgress}
@@ -154,12 +168,13 @@ export default function VideoPlayerYoutube({ data }) {
               onPlay={handlePlay}
               onPause={handlePause}
               volume={volume}
+
               width='100%'
               height='450px'
               config={{
                 youtube: {
                   playerVars: {
-                    showinfo: 1,
+                    showinfo: 0,
                     autoplay: 1,
                     disablekb: 1,
                     modestbranding: 1,
