@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
       setUser(JSON.parse(userCookie));
   }, []);
 
-  async function signIn({ email, password, profile }) {
+  async function signIn({ username, password, profile }) {
     const toastId = toast.loading("Processando acesso...");
     try {
       const { data: {
@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
       } } = await api.post('auth/login', {
         app: "ead",
         profile: profile,
-        email,
+        username,
         password
       });
       setCookie(undefined, 'SEAD-00', token, {
