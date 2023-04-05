@@ -7,9 +7,9 @@ import AdminNavbar from "~/partials/Navbar";
 import AdminFooter from "~/partials/Footer";
 import Sidebar from "~/partials/Sidebar";
 
-import routes from "~/configs/routes/aluno";
+import routes from "~/configs/routes/cma";
 
-export default function AlunoTemplate(props) {
+export default function CMATemplate(props) {
   const router = useRouter();
 
   let mainContentRef = React.createRef();
