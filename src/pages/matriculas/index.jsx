@@ -15,7 +15,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const signInFormSchema = yup.object().shape({
-  email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
+  username: yup.string().required('Nome de usuário obrigatório'),
   password: yup.string().required('Senha obrigatória')
 });
 
@@ -42,11 +42,11 @@ export default function StudantAccess() {
         <input type="hidden" {...register('profile')} value="cma" />
         <CFormInput
           className="mb-4"
-          autoComplete="email"
-          placeholder="Seu email"
-          {...register('email')}
-          error={errors.email}
-          value="jackson144@gmail.com"
+          autoComplete="username"
+          placeholder="Seu usuário"
+          {...register('username')}
+          error={errors.username}
+          value="jackson"
         />
         <CFormInput
           className="mb-4"
