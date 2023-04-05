@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import {
-  Button,
-  Card,
-  CardHeader,
-  Table,
-  Container,
-  Row,
-  Col,
+  Button, Card, CardHeader, Table, Container, Row,
+  Modal, ModalHeader, ModalBody, ModalFooter
 } from "reactstrap";
 import AlunoTemplate from "~/templates/AlunoTemplate";
 import Header from "~/components/_partials/Header";
@@ -16,24 +11,18 @@ import { parseCookies } from "nookies";
 import { getAPIClient } from "~/services/axios";
 import { toast } from "react-toastify";
 import moment from "moment";
-import Router, { useRouter } from 'next/router';
-import Link from "next/link";
+import { useRouter } from 'next/router';
+import LessonStatusLabel from "~/components/Decorator/LessonStatusLabel/index";
 
 export default function MyLessonsByClass({ pageData }) {
   const router = useRouter();
   const { classTag } = router.query;
-
-  const [activeNav, setActiveNav] = useState(1);
   const [classData, setClassData] = useState(pageData.lessonsList);
   const [lessonsList, setLessonsList] = useState(pageData.lessonsList.StudantOnLesson);
   const [infoLoad, setInfoLoad] = useState('Nenhum registro');
+  const [dataReviewLesson, setDataReviewLesson] = useState(null);
+  const [openReviewLesson, setOpenReviewLesson] = useState(false);
   const { "SEAD-02": userCookie } = parseCookies();
-
-  const toggleNavs = (e, index) => {
-    e.preventDefault();
-    setActiveNav(index);
-    setChartExample1Data("data" + index);
-  };
 
   const reloadCourses = async () => {
     const userData = JSON.parse(userCookie);
@@ -42,7 +31,6 @@ export default function MyLessonsByClass({ pageData }) {
     setInfoLoad('Carregando...');
     try {
       const { data } = await api.get(`studants-on-class/by-class-tag/${userData.id}/${classTag}`);
-
       if (data.StudantOnLesson.length > 0) {
         setLessonsList(data.StudantOnLesson);
       } else {
@@ -59,9 +47,51 @@ export default function MyLessonsByClass({ pageData }) {
     }
   }
 
+  const toggle = () => setOpenReviewLesson(!openReviewLesson);
+
+  const handleLesson = (lesson) => {
+    if (lesson.concluded === false) {
+      toast.info(`Abrindo aula: ${lesson.lesson.name}`);
+      router.push(`/portal/aluno/meus-cursos/${classTag}/assistir/${lesson.lesson.slug}`);
+    } else {
+      setDataReviewLesson(lesson);
+      setOpenReviewLesson(true);
+    }
+  }
+
+  const ModalReviewLesson = () => {
+    return (
+      <Modal isOpen={openReviewLesson} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Assistir Novamente</ModalHeader>
+        <ModalBody>
+          {dataReviewLesson && (
+            <div className="mb-0">
+              <h4 className="mb-0">Aula: <b>{dataReviewLesson.lesson?.name}</b></h4>
+              <h5 className="mb-0"><b>Você já assistiu esta aula, gostaria de assistir ela novamente?</b></h5>
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secundary" onClick={() => {
+            toast.info(`Abrindo aula: ${dataReviewLesson.lesson.name}`);
+            router.push(`/portal/aluno/meus-cursos/${classTag}/assistir/${dataReviewLesson.lesson.slug}`);
+            toggle();
+          }}>
+            Sim, quero!
+          </Button>{' '}
+          <Button color="danger" onClick={toggle}>
+            Não
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
+  }
+
+
   return (
     <AlunoTemplate>
       <Header />
+      <ModalReviewLesson />
       <Container className="mt--5" fluid>
         <Card className="shadow">
           <CardHeader className="border-0">
@@ -97,13 +127,13 @@ export default function MyLessonsByClass({ pageData }) {
               {
                 lessonsList ? (
                   lessonsList.map((item, index) => {
-                    console.log(item)
+                    console.log(item);
                     return (
                       <tr key={`item-${item.id}`}>
                         <td>{index + 1}</td>
-                        <td><Link href={`/portal/aluno/meus-cursos/${classTag}/assistir/${item.slug}`}>{item.lesson?.name}</Link></td>
+                        <td><a href="#ver" onClick={() => handleLesson(item)}>{item.lesson?.name}</a></td>
                         <td>{item.lesson.type}</td>
-                        <td>{item.eadStatus}</td>
+                        <td><LessonStatusLabel lesson={item} /></td>
                       </tr>
                     )
                   })

@@ -34,7 +34,7 @@ export default function Dashboard({ pageData }) {
 
 
 export const getServerSideProps = async ctx => {
-  withSSRAuth();
+  withSSRAuth(ctx);
   const HEADER_CARDS_ARRAY = [
     {
       title: "Cursos Matriculado",
