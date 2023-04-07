@@ -14,7 +14,7 @@ import moment from "moment";
 import { useRouter } from 'next/router';
 import LessonStatusLabel from "~/components/Decorator/LessonStatusLabel/index";
 
-export default function MyLessonsByClass({ pageData }) {
+export default function MyLessonsByClass({ userData, pageData }) {
   const router = useRouter();
   const { classTag } = router.query;
   const [classData, setClassData] = useState(pageData.lessonsList);
@@ -89,7 +89,7 @@ export default function MyLessonsByClass({ pageData }) {
 
 
   return (
-    <AlunoTemplate>
+    <AlunoTemplate userData={userData}>
       <Header />
       <ModalReviewLesson />
       <Container className="mt--5" fluid>
@@ -170,6 +170,6 @@ export const getServerSideProps = async ctx => {
     lessonsList: data
   }
   return {
-    props: { pageData },
+    props: { userData, pageData },
   }
 }; 

@@ -14,17 +14,15 @@ import {
 import { AuthContext, signOut } from "~/contexts/AuthContext";
 import md5 from "md5";
 
-function AdminNavbar({ brandText }) {
+function AdminNavbar({ brandText, userData }) {
   const context = useContext(AuthContext);
 
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
         <Container fluid>
-          <Link href="/admin/dashboard">
-            <a className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">
-              {brandText}
-            </a>
+          <Link href="/" className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">
+            {brandText}
           </Link>
 
           <Nav className="align-items-center d-none d-md-flex" navbar>
@@ -34,17 +32,15 @@ function AdminNavbar({ brandText }) {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={
-                        context.user &&
-                        `https://www.gravatar.com/avatar/${md5(
-                          context.user.email
-                        )}`
+                      src={`https://www.gravatar.com/avatar/${md5(
+                        userData.email
+                      )}`
                       }
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      {context.user && context.user.name}
+                      {userData.name}
                     </span>
                   </Media>
                 </Media>

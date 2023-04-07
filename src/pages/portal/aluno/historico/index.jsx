@@ -7,9 +7,9 @@ import { getAPIClient } from "~/services/axios";
 import AlunoTemplate from "~/templates/AlunoTemplate";
 import { withSSRAuth } from "~/utils/withSSRAuth";
 
-export default function Page({ pageData }) {
+export default function Page({ userData, pageData }) {
   return (
-    <AlunoTemplate>
+    <AlunoTemplate userData={userData}>
       <Header />
       <Container className="mt--7" fluid>
         <FutureImplementation />
@@ -23,12 +23,9 @@ export const getServerSideProps = async ctx => {
   const apiClient = getAPIClient(ctx);
   const { "SEAD-02": userCookie } = parseCookies(ctx);
   const userData = JSON.parse(userCookie)
-  /* const { "smartEAD.user": userCookie } = parseCookies(ctx);
-  const userData = JSON.parse(userCookie)
-  const { data } = await getAPIClient.get(`studants-on-class/by-studant/${userData.id}`); */
   const pageData = {};
   return {
-    props: { pageData },
+    props: { userData, pageData },
 
   }
 }

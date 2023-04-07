@@ -21,15 +21,15 @@ function AccessTemplate({ children }) {
                   {children}
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
-                <CCardBody className="text-center"
-                  style={{
-                    backgroundImage: "url('/assets/images/login.png')",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    opacity: 0.5
-                  }}
-                >
+              <CCard className="text-white bg-dark py-5" >
+                <CCardBody className="text-center">
+                  <img
+                    src="/assets/images/smartEAD-2.png"
+                    height={200}
+                    style={{
+                      boxShadow: 10
+                    }}
+                  ></img>
                 </CCardBody>
               </CCard>
             </CCardGroup>

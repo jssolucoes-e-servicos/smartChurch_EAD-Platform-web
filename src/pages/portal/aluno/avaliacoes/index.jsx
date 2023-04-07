@@ -17,7 +17,7 @@ import { getAPIClient } from "~/services/axios";
 import { toast } from "react-toastify";
 import moment from "moment";
 import Link from "next/link";
-export default function Page({ pageData }) {
+export default function Page({ userData, pageData }) {
   const [activeNav, setActiveNav] = useState(1);
   const [evaluations, setEvaluations] = useState([]);
   const [infoLoad, setInfoLoad] = useState('Nenhum registro');
@@ -51,7 +51,7 @@ export default function Page({ pageData }) {
   }
 
   return (
-    <AlunoTemplate>
+    <AlunoTemplate userData={userData}>
       <Header />
       <Container className="mt--7" fluid>
         <Card className="shadow">
@@ -118,12 +118,12 @@ export default function Page({ pageData }) {
 
 export const getServerSideProps = async ctx => {
   withSSRAuth(ctx);
-  /* const apiClient = getAPIClient(ctx);
+  /* const apiClient = getAPIClient(ctx); */
   const { "SEAD-02": userCookie } = parseCookies(ctx);
-  const userData = JSON.parse(userCookie) */
+  const userData = JSON.parse(userCookie)
   //const { data } = await apiClient.get(`studants-on-class/by-studant/${userData.id}`);
   const pageData = {}
   return {
-    props: { pageData },
+    props: { userData, pageData },
   }
 }; 

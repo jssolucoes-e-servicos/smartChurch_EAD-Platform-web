@@ -18,7 +18,7 @@ export default function AccessTeacher() {
         <p className="text-medium-emphasis">Identifique-se</p>
         <input type="hidden" {...register('profile')} value="teacher" />
         <CFormInput
-          className="mb-4" placeholder="E-mail" autoComplete="email" />
+          className="mb-4" placeholder="Seu Usuário" autoComplete="username" />
         <CFormInput
           className="mb-4"
           type="password"

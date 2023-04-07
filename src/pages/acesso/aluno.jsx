@@ -40,11 +40,11 @@ export default function StudantAccess() {
         <input type="hidden" {...register('profile')} value="studant" />
         <CFormInput
           className="mb-4"
-          autoComplete="email"
-          placeholder="Seu email"
-          {...register('email')}
-          error={errors.email}
-          value="jackson144@gmail.com"
+          autoComplete="username"
+          placeholder="Seu usuário"
+          {...register('username')}
+          error={errors.username}
+          value="jackson"
         />
         <CFormInput
           className="mb-4"

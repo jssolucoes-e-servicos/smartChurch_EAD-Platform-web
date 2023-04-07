@@ -17,14 +17,14 @@ export function signOut() {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const isAuthenticated = !!user;
-  const {
+  /* const {
     "SEAD-02": userCookie
   } = parseCookies();
 
   useEffect(() => {
     if (userCookie)
       setUser(JSON.parse(userCookie));
-  }, []);
+  }, []); */
 
   async function signIn({ username, password, profile }) {
     const toastId = toast.loading("Processando acesso...");

@@ -6,11 +6,6 @@ import { Container, Row, Col, Nav, NavItem, NavLink } from "reactstrap";
 
 function Footer() {
 
-  useEffect(() => {
-
-  }, []);
-
-
   return (
     <footer className="footer">
       <Row className="align-items-center justify-content-xl-between">

@@ -34,13 +34,13 @@ export default function CMATemplate(props) {
         {...props}
         routes={routes}
         logo={{
-          innerLink: "/portal/aluno",
+          link: "/matriculas/cma",
           imgSrc: "/assets/images/smartEAD-1.png",
           imgAlt: "smartEAD",
         }}
       />
       <div className="main-content" ref={mainContentRef}>
-        <AdminNavbar {...props} brandText={getBrandText()} />
+        <AdminNavbar {...props} brandText={getBrandText()} userData={props.userData} />
         {props.children}
         <Container fluid>
           <AdminFooter />

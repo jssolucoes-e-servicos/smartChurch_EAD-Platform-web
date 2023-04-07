@@ -17,9 +17,9 @@ import { withSSRAuth } from "~/utils/withSSRAuth";
 import { getAPIClient } from "~/services/axios";
 import { parseCookies } from "nookies";
 
-export default function Profile() {
+export default function Profile({ userData }) {
   return (
-    <AlunoTemplate>
+    <AlunoTemplate userData={userData}>
       <HeaderUser />
       {/* Page content */}
       <Container className="mt--7" fluid>
@@ -323,7 +323,7 @@ export const getServerSideProps = async ctx => {
   const pageData = {}
 
   return {
-    props: { pageData },
+    props: { userData, pageData },
 
   }
 }; 

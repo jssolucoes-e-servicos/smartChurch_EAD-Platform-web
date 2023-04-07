@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Button,
-  Card,
-  CardHeader,
-  Table,
   Container,
-  Row,
-  Col,
 } from "reactstrap";
 import CMATemplate from "~/templates/CMATemplate";
 import Header from "~/components/_partials/Header";
-import MessagesList from "~/components/Messages/List";
 import { withSSRAuth } from "~/utils/withSSRAuth";
+import { parseCookies } from "nookies";
 
-export default function DashboardCMA({ pageData }) {
+export default function DashboardCMA({ pageData, userData }) {
 
   return (
-    <CMATemplate>
-      <Header cards={pageData.dashboardCards} />
+    <CMATemplate userData={userData}>
+      <Header />
       <Container className="mt--7" fluid>
 
       </Container>
@@ -28,35 +22,10 @@ export default function DashboardCMA({ pageData }) {
 
 export const getServerSideProps = async ctx => {
   withSSRAuth(ctx);
-  const HEADER_CARDS_ARRAY = [
-    {
-      title: "Cursos Matriculado",
-      value: "1",
-      icon: null
-    },
-    {
-      title: "Aulas Disponíveis",
-      value: "10",
-      icon: null
-    },
-    {
-      title: "Provas Pendentes",
-      value: "0",
-      icon: null
-    },
-    {
-      title: "Leituras Pendentes",
-      value: "0",
-      icon: null
-    }
-  ]
-
-  const pageData = {
-    dashboardCards: HEADER_CARDS_ARRAY
-  }
-
+  const { "SEAD-02": userCookie } = parseCookies(ctx);
+  const userData = JSON.parse(userCookie)
+  const pageData = {}
   return {
-    props: { pageData },
-
+    props: { userData, pageData },
   }
 } 

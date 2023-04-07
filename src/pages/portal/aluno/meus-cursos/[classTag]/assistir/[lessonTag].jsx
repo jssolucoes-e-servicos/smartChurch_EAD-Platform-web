@@ -17,18 +17,11 @@ import api from "~/services/api";
 import { getAPIClient } from "~/services/axios";
 import VideoPlayerYoutube from "~/components/VideoPlayerYoutube/index";
 
-export default function MyLessonsByClass({ pageData }) {
+export default function MyLessonsByClass({ userData, pageData }) {
   const router = useRouter();
   const { lessonTag } = router.query;
-  const [activeNav, setActiveNav] = useState(1);
   const [infoLoad, setInfoLoad] = useState('Nenhum registro');
   const { "SEAD-02": userCookie } = parseCookies();
-
-  const toggleNavs = (e, index) => {
-    e.preventDefault();
-    setActiveNav(index);
-    setChartExample1Data("data" + index);
-  };
 
   const reloadChat = async () => {
     const toastId = toast.loading("atualizando chat");
@@ -71,7 +64,7 @@ export default function MyLessonsByClass({ pageData }) {
   }
 
   return (
-    <AlunoTemplate>
+    <AlunoTemplate userData={userData}>
       <Header />
       <Container className="mt--6" fluid>
         <Card className="shadow">
@@ -103,6 +96,6 @@ export const getServerSideProps = async ctx => {
   }
 
   return {
-    props: { pageData },
+    props: { userData, pageData },
   }
 };

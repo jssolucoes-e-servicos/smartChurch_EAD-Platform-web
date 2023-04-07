@@ -18,17 +18,10 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import Link from "next/link";
 
-export default function Courses({ pageData }) {
-  const [activeNav, setActiveNav] = useState(1);
+export default function Courses({ userData, pageData }) {
   const [myClasses, setMyClasses] = useState(pageData.coursesList);
   const [infoLoad, setInfoLoad] = useState('Nenhum registro');
   const { "SEAD-02": userCookie } = parseCookies();
-
-  const toggleNavs = (e, index) => {
-    e.preventDefault();
-    setActiveNav(index);
-    setChartExample1Data("data" + index);
-  };
 
   const reloadCourses = async () => {
     const userData = JSON.parse(userCookie);
@@ -54,7 +47,7 @@ export default function Courses({ pageData }) {
   }
 
   return (
-    <AlunoTemplate>
+    <AlunoTemplate userData={userData}>
       <Header />
       <Container className="mt--7" fluid>
         <Card className="shadow">
@@ -135,7 +128,7 @@ export const getServerSideProps = async ctx => {
   }
 
   return {
-    props: { pageData },
+    props: { userData, pageData },
 
   }
 }; 

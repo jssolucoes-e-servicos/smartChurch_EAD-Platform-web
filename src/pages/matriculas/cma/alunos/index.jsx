@@ -14,23 +14,19 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import { CForm, CFormInput } from '@coreui/react'
+import { CFormInput } from '@coreui/react'
 import CMATemplate from "~/templates/CMATemplate";
 import { useForm } from 'react-hook-form';
 import Header from "~/components/_partials/Header";
 import { withSSRAuth } from "~/utils/withSSRAuth";
 import { parseCookies } from "node_modules/nookies";
 import { toast } from "node_modules/react-toastify";
-import { getAPIClient } from "~/services/axios";
 import moment from "node_modules/moment/moment";
 import api from "~/services/api";
-import PaginationComponent from "~/components/Pagination/index";
-
 
 export default function DashboardCMA({ userData }) {
   const { register, handleSubmit, formState } = useForm();
   const [persons, setPersons] = useState(null);
-  const [paginate, setPaginate] = useState(null);
   const [infoLoad, setInfoLoad] = useState('Nenhum registro');
   const [isOpenRegister, setIsOpenRegister] = useState(false);
   const { errors } = formState;
@@ -38,32 +34,29 @@ export default function DashboardCMA({ userData }) {
 
   const handleFind = async ({ name }) => {
     setPersons(null);
-    setPaginate(null);
-    const toastId = toast.loading("Consultando...");
-    try {
-      const { data } = await api.post(`persons/find-with-name`, {
-        churchId: userData.PersonsOnChurches[0].church.id,
-        name: name
-      });
-      setPersons(data.data);
-      setPaginate({
-        total: data.total,
-        total_pages: data.total_pages,
-        actual_page: data.actual_page,
-      })
-      console.log(data);
-      toast.update(toastId, { render: `Pronto`, type: "success", isLoading: false });
-      toast.dismiss(toastId);
-    } catch (error) {
-      toast.update(toastId, { render: `Ops! ${error}`, type: "error", isLoading: false });
-      toast.dismiss(toastId);
-      toast.error('Ops! Falha ao pesquisar esta pessoa');
+    if (name.length <= 2) {
+      toast.info('digite no mínimo 3 caracteres');
+    } else {
+      const toastId = toast.loading("Consultando...");
+      try {
+        const { data } = await api.post(`persons/find-with-name`, {
+          churchId: userData.PersonsOnChurches[0].church.id,
+          name: name
+        });
+        setPersons(data);
+        console.log(data);
+        toast.update(toastId, { render: `Pronto`, type: "success", isLoading: false });
+        toast.dismiss(toastId);
+      } catch (error) {
+        toast.update(toastId, { render: `Ops! ${error}`, type: "error", isLoading: false });
+        toast.dismiss(toastId);
+        toast.error('Ops! Falha ao pesquisar esta pessoa');
+      }
     }
-
   }
 
   return (
-    <CMATemplate>
+    <CMATemplate userData={userData}>
       <Header />
       <Container className="mt--7" fluid>
         <Card className="shadow">
@@ -111,7 +104,7 @@ export default function DashboardCMA({ userData }) {
           <CardHeader className="border-0">
             <Row className="align-items-center">
               <div className="col">
-                <h4 className="mb-0">Pessoas Encontradas {persons ? `(${paginate?.total})` : ''}</h4>
+                <h4 className="mb-0">Pessoas Encontradas {persons ? `(${persons.length})` : ''}</h4>
               </div>
             </Row>
           </CardHeader>
@@ -156,7 +149,6 @@ export default function DashboardCMA({ userData }) {
                 )
               }
             </tbody>
-            {paginate !== null && <PaginationComponent />}
           </Table>
         </Card>
       </Container>

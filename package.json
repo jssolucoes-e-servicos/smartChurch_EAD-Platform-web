@@ -28,15 +28,14 @@
     "classnames": "^2.2.6",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
-    "next": "10.0.6",
+    "next": "^13.2.4",
     "nookies": "^2.5.2",
     "nouislider": "^14.6.3",
     "path": "^0.12.7",
-    "react": "^17.0.1",
-    "react-chartjs-2": "^2.11.1",
+    "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.0.3",
     "react-datetime": "^3.0.4",
-    "react-dom": "^17.0.1",
+    "react-dom": "^18.2.0",
     "react-editor-js": "^2.1.0",
     "react-hook-form": "^7.42.1",
     "react-player": "^2.11.2",
@@ -47,7 +46,7 @@
     "reactstrap": "^8.9.0",
     "rich-markdown-editor": "^11.21.3",
     "screenfull": "^6.0.2",
-    "webpack": "^4.44.1",
+    "webpack": "^5.77.0",
     "yup": "^0.32.11"
   }
 }
