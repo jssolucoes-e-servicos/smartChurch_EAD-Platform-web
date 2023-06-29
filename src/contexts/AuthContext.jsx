@@ -1,6 +1,6 @@
 import Router from 'next/router';
-import { destroyCookie, parseCookies, setCookie } from 'nookies';
-import { createContext, useEffect, useState } from 'react';
+import { destroyCookie, setCookie } from 'nookies';
+import { createContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import api from '~/services/api';
 
@@ -33,7 +33,8 @@ export function AuthProvider({ children }) {
         access_token: token,
         user: dbUser
       } } = await api.post('auth/login', {
-        app: "ead",
+        churchId: '64988313af13278eca997368',
+        app: 'ead',
         profile: profile,
         username,
         password

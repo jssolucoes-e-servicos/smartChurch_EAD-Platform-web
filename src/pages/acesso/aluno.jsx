@@ -1,21 +1,21 @@
-import React, { useContext } from "react";
 import {
   CButton,
   CCol,
   CForm,
   CFormInput,
   CRow,
-} from '@coreui/react'
+} from '@coreui/react';
+import React, { useContext } from "react";
 
-import AccessTemplate from "~/templates/AccessTemplate";
-import { withSSRGuest } from '~/utils/withGuest';
-import { AuthContext } from '~/contexts/AuthContext';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { AuthContext } from '~/contexts/AuthContext';
+import AccessTemplate from "~/templates/AccessTemplate";
+import { withSSRGuest } from '~/utils/withGuest';
 
 const signInFormSchema = yup.object().shape({
-  email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
+  username: yup.string().required('Username / Email obrigatório'),
   password: yup.string().required('Senha obrigatória')
 });
 
@@ -44,7 +44,7 @@ export default function StudantAccess() {
           placeholder="Seu usuário"
           {...register('username')}
           error={errors.username}
-          value="jackson"
+        //value="jackson"
         />
         <CFormInput
           className="mb-4"
@@ -53,7 +53,7 @@ export default function StudantAccess() {
           placeholder="Sua Senha"
           {...register('password')}
           error={errors.password}
-          value="522576"
+        //value="522576"
         />
 
         <CRow>

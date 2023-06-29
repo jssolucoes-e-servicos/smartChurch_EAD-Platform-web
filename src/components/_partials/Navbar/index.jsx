@@ -1,18 +1,18 @@
-import React, { useContext } from "react";
 import Link from "next/link";
+import React, { useContext } from "react";
 // reactstrap components
+import md5 from "md5";
 import {
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Navbar,
-  Nav,
   Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   Media,
+  Nav,
+  Navbar,
+  UncontrolledDropdown,
 } from "reactstrap";
 import { AuthContext, signOut } from "~/contexts/AuthContext";
-import md5 from "md5";
 
 function AdminNavbar({ brandText, userData }) {
   const context = useContext(AuthContext);
@@ -33,14 +33,14 @@ function AdminNavbar({ brandText, userData }) {
                     <img
                       alt="..."
                       src={`https://www.gravatar.com/avatar/${md5(
-                        userData.email
+                        userData?.email ? userData.email : 'teste@gmail.com'
                       )}`
                       }
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      {userData.name}
+                      {userData?.name}
                     </span>
                   </Media>
                 </Media>

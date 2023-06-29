@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "author": "JS Soluções e Serviços",
   "license": "MIT",
-  "engines": {
-    "node": "16"
-  },
   "scripts": {
     "start": "next start",
     "build": "next build",
