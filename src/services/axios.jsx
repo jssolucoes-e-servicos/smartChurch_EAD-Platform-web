@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export function getAPIClient(ctx) {
   const { "SEAD-00": token } = parseCookies(ctx);
   const { "SEAD-01": profile } = parseCookies(ctx);
-  const URI = process.env.API_URL;
+  const URI = 'https://smartchurch-backend.onrender.com/';
 
   const api = axios.create({
     baseURL: URI,
