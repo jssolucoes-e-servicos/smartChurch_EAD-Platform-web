@@ -7,7 +7,7 @@ export function getAPIClient(ctx) {
   const { "SEAD-01": profile } = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: process.env.API_URL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",

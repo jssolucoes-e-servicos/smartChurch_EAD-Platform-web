@@ -1,28 +1,31 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  Table,
-  Container,
-  Row,
-  Col,
-  Form,
-  Collapse,
-  FormGroup,
-  Input,
-  Label,
-} from "reactstrap";
-import { CFormInput } from '@coreui/react'
-import CMATemplate from "~/templates/CMATemplate";
-import { useForm } from 'react-hook-form';
-import Header from "~/components/_partials/Header";
-import { withSSRAuth } from "~/utils/withSSRAuth";
+import { CFormInput } from '@coreui/react';
+import moment from "node_modules/moment/moment";
 import { parseCookies } from "node_modules/nookies";
 import { toast } from "node_modules/react-toastify";
-import moment from "node_modules/moment/moment";
+import React, { useState } from "react";
+import { useForm } from 'react-hook-form';
+import {
+  Button,
+  CButton,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
+  CModalTitle,
+  Card,
+  CardBody,
+  CardHeader,
+  Container,
+  Form,
+  FormGroup,
+  Label,
+  Row,
+  Table
+} from "reactstrap";
+import Header from "~/components/_partials/Header";
 import api from "~/services/api";
+import CMATemplate from "~/templates/CMATemplate";
+import { withSSRAuth } from "~/utils/withSSRAuth";
 
 export default function DashboardCMA({ userData }) {
   const { register, handleSubmit, formState } = useForm();
@@ -39,8 +42,7 @@ export default function DashboardCMA({ userData }) {
     } else {
       const toastId = toast.loading("Consultando...");
       try {
-        const { data } = await api.post(`persons/find-with-name`, {
-          churchId: userData.PersonsOnChurches[0].church.id,
+        const { data } = await api.post(`persons/${userData.church.id}/find-with-name`, {
           name: name
         });
         setPersons(data);
@@ -55,6 +57,23 @@ export default function DashboardCMA({ userData }) {
     }
   }
 
+  const ModalRegister = () => {
+    return (
+      <CModal visible={isOpenRegister} onClose={() => setIsOpenRegister(false)}>
+        <CModalHeader>
+          <CModalTitle>React Modal title</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <p>React Modal body text goes here.</p>
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="secondary">Close</CButton>
+          <CButton color="primary">Save changes</CButton>
+        </CModalFooter>
+      </CModal>
+    )
+  }
+
   return (
     <CMATemplate userData={userData}>
       <Header />
@@ -65,15 +84,18 @@ export default function DashboardCMA({ userData }) {
               <div className="col">
                 <h3 className="mb-0">Matrícula de Alunos</h3>
               </div>
-              {/* <div className="col text-right">
-                <Button
-                  color={isOpenRegister ? 'danger' : 'primary'}
-                  onClick={toggleRegister}
-                  size="md"
-                >
-                  {isOpenRegister ? 'Cancelar' : 'Nova Matricula'}
-                </Button>
-              </div> */}
+              <div className="col text-right">
+                {persons !== null ? (
+                  <Button
+                    color={isOpenRegister ? 'danger' : 'primary'}
+                    onClick={toggleRegister}
+                    size="md"
+                  >
+                    {isOpenRegister ? 'Cancelar' : 'Novo Aluno'}
+                  </Button>
+                ) : (<React.Fragment />)}
+
+              </div>
             </Row>
             <Form onSubmit={handleSubmit(handleFind)}>
               <FormGroup floating>
@@ -91,14 +113,10 @@ export default function DashboardCMA({ userData }) {
             </Form>
           </CardHeader>
           <CardBody>
-
-
-            {/* <Collapse isOpen={true}>
-              
-            </Collapse> */}
-
           </CardBody>
         </Card>
+
+
 
         <Card className="shadow mt-2">
           <CardHeader className="border-0">
@@ -151,6 +169,7 @@ export default function DashboardCMA({ userData }) {
             </tbody>
           </Table>
         </Card>
+        <ModalRegister />
       </Container>
     </CMATemplate >
   );

@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import {
-  Button,
-  Card,
-  CardHeader,
-  Table,
-  Container,
-  Row,
-  Col,
+  Container
 } from "reactstrap";
-import AlunoTemplate from "~/templates/AlunoTemplate";
 import Header from "~/components/_partials/Header";
-import MessagesList from "~/components/Messages/List";
+import AlunoTemplate from "~/templates/AlunoTemplate";
 import { withSSRAuth } from "~/utils/withSSRAuth";
 
 export default function Dashboard({ pageData }) {
@@ -20,7 +13,6 @@ export default function Dashboard({ pageData }) {
   const toggleNavs = (e, index) => {
     e.preventDefault();
     setActiveNav(index);
-    setChartExample1Data("data" + index);
   };
   return (
     <AlunoTemplate>

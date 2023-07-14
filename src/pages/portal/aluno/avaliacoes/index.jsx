@@ -1,22 +1,19 @@
+import moment from "moment";
+import Link from "next/link";
+import { parseCookies } from "nookies";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import {
   Button,
   Card,
   CardHeader,
-  Table,
   Container,
   Row,
-  Col,
+  Table
 } from "reactstrap";
-import AlunoTemplate from "~/templates/AlunoTemplate";
 import Header from "~/components/_partials/Header";
+import AlunoTemplate from "~/templates/AlunoTemplate";
 import { withSSRAuth } from "~/utils/withSSRAuth";
-import api from "~/services/api";
-import { parseCookies } from "nookies";
-import { getAPIClient } from "~/services/axios";
-import { toast } from "react-toastify";
-import moment from "moment";
-import Link from "next/link";
 export default function Page({ userData, pageData }) {
   const [activeNav, setActiveNav] = useState(1);
   const [evaluations, setEvaluations] = useState([]);
@@ -26,7 +23,6 @@ export default function Page({ userData, pageData }) {
   const toggleNavs = (e, index) => {
     e.preventDefault();
     setActiveNav(index);
-    setChartExample1Data("data" + index);
   };
 
   const reloadEvaluations = async () => {

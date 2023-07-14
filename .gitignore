@@ -4,7 +4,7 @@ package-lock.json
 yarn.lock
 /build
 /.next
-
+.env
 # Sentry
 .sentryclirc
 /src/services/axios.jsx
