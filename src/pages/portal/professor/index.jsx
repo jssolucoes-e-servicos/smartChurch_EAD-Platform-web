@@ -2,8 +2,8 @@ import React from "react";
 export default function Dashboard(props) {
   return (
     <>
-      <Container className="mt--7" fluid>
-      </Container>
+      <div className="mt--7" fluid>
+      </div>
     </>
   );
 };
