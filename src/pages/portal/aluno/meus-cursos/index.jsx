@@ -27,8 +27,8 @@ export default function MyCourses({ userData, pageData }) {
     const toastId = toast.loading("Consultando meus cursos...");
     setInfoLoad('Carregando...');
     try {
-      const { data } = await api.get(`ead/studants-on-classes/${userData.church.id}/by-studant/${userData.id}`);
-
+      const { data } = await api.get(`ead/studants-on-classes/${userData.Church.id}/by-studant/${userData.id}`);
+      console.log(data);
       if (data.length > 0) {
         setMyClasses(data);
       } else {
@@ -46,7 +46,7 @@ export default function MyCourses({ userData, pageData }) {
   }
 
   return (
-    <AlunoTemplate>
+    <AlunoTemplate userData={userData}>
       <Header />
       <Container className="mt--7" fluid>
         <Card className="shadow">
@@ -80,16 +80,17 @@ export default function MyCourses({ userData, pageData }) {
               {
                 myClasses ? (
                   myClasses.map(item => {
-                    const lessonsLentgh = item.StudantOnLesson.length;
+                    const lessonsLentgh = item.StudantOnLesson?.length;
                     let conludedCount = 0;
-                    item.StudantOnLesson.map(lesson => {
+                    item.StudantOnLesson?.map(lesson => {
+                      if (lesson) { }
                       if (lesson.concluded === true) { conludedCount += 1 }
                     });
                     const percentage = ((conludedCount / lessonsLentgh) * 100);
                     const progressColor = percentage >= 75 ? '#2dce89' : (percentage >= 25 ? '#ffd600' : '#f5365c');
                     return (
                       <tr key={`item-${item.id}`}>
-                        <td><Link href={`/portal/aluno/meus-cursos/${item.class.slug}`}>{item.class.course.name}</Link></td>
+                        <td><Link href={`/portal/aluno/meus-cursos/${item.class?.slug}`}>{item.class.course.name}</Link></td>
                         <td>{item.class.name}</td>
                         <td>{item.StudantOnLesson.length}</td>
                         <td>
@@ -128,11 +129,12 @@ export const getServerSideProps = async ctx => {
   const apiClient = getAPIClient(ctx);
   const { "SEAD-02": userCookie } = parseCookies(ctx);
   const userData = JSON.parse(userCookie)
-  const { data } = await apiClient.get(`ead/studants-on-classes/${userData.church.id}/by-studant/${userData.id}`);
+
+  const { data } = await apiClient.get(`ead/studants-on-classes/${userData.Church.id}/by-studant/${userData.id}`);
   const pageData = {
     coursesList: data
   }
-
+  console.log(data);
   return {
     props: { userData, pageData },
   }
