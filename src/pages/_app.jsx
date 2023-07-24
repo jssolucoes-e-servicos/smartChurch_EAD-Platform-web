@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React from "react";
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from '~/contexts/AuthContext';
 import '../styles/ReactToastify.css';
@@ -9,14 +9,14 @@ import "~/assets/css/nextjs-argon-dashboard.css";
 import "~/assets/plugins/nucleo/css/nucleo.css";
 
 export default function MyApp({ Component, pageProps }) {
-
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/pwabuilder-sw.js')
-        .then((registration) => console.log('scope is: ', registration.scope));
-    }
-  }, []);
+  /* 
+    useEffect(() => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/pwabuilder-sw.js')
+          .then((registration) => console.log('scope is: ', registration.scope));
+      }
+    }, []); */
 
   return (<AuthProvider>
     <Head>
