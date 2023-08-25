@@ -1,16 +1,16 @@
+import { AxiosResponse } from "axios";
 import { parseCookies } from "nookies";
 import { toast } from "react-toastify";
-import { getAPIClient } from './axios';
-
+import { getAPIClient } from "./axios-module";
 
 const api = getAPIClient();
 const { "SEAD-01": profile } = parseCookies();
 
 api.interceptors.response.use(
-  function (response) {
+  function (response): AxiosResponse {
     return response;
   },
-  function (error) {
+  function (error: any) {
     if (error.response.status === 401) {
       sessionStorage.clear();
       localStorage.clear();
@@ -18,13 +18,13 @@ api.interceptors.response.use(
       let destiny;
       switch (profile) {
         case "teacher":
-          destiny = '/acesso/professor';
+          destiny = "/acesso/professor";
           break;
         case "studant":
-          destiny = '/acesso/aluno';
+          destiny = "/acesso/aluno";
           break;
         case "cma":
-          destiny = '/matriculas/cma';
+          destiny = "/matriculas/cma";
         default:
           break;
       }
@@ -32,8 +32,8 @@ api.interceptors.response.use(
         redirect: {
           destination: destiny,
           permanent: false,
-        }
-      }
+        },
+      };
     }
     return Promise.reject(error);
   }

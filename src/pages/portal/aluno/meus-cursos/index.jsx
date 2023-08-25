@@ -1,3 +1,8 @@
+import Header from "@/components/_partials/Header";
+import api from "@/services/api";
+import { getAPIClient } from "@/services/axios-module";
+import AlunoTemplate from "@/templates/AlunoTemplate";
+import { withSSRAuth } from "@/utils/withSSRAuth";
 import moment from "moment";
 import Link from "next/link";
 import { parseCookies } from "nookies";
@@ -11,11 +16,6 @@ import {
   Row,
   Table
 } from "reactstrap";
-import Header from "~/components/_partials/Header";
-import api from "~/services/api";
-import { getAPIClient } from "~/services/axios";
-import AlunoTemplate from "~/templates/AlunoTemplate";
-import { withSSRAuth } from "~/utils/withSSRAuth";
 
 export default function MyCourses({ userData, pageData }) {
   const [myClasses, setMyClasses] = useState(pageData.coursesList);

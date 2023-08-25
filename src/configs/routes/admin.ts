@@ -1,39 +1,40 @@
-var routes = [
+const base = "/portal/aluno";
+const routes = [
   {
     path: "/",
     name: "Início",
     icon: "ni ni-tv-2 text-primary",
-    layout: "/portal/aluno",
+    layout: `${base}`,
   },
   {
     path: "/meus-cursos",
     name: "Meus Cursos",
     icon: "ni ni-planet text-blue",
-    layout: "/portal/aluno",
+    layout: `${base}`,
   },
   {
     path: "/cursos",
     name: "Cursos Disponíveis",
     icon: "ni ni-pin-3 text-orange",
-    layout: "/portal/aluno",
+    layout: `${base}`,
   },
   {
     path: "/avaliacoes",
     name: "Provas e Avalições",
     icon: "ni ni-single-02 text-yellow",
-    layout: "/portal/aluno",
+    layout: `${base}`,
   },
   {
     path: "/leituras",
     name: "Leituras",
     icon: "ni ni-bullet-list-67 text-red",
-    layout: "/portal/aluno",
+    layout: `${base}`,
   },
   {
     path: "/historico",
     name: "Histórico",
     icon: "ni ni-key-25 text-info",
-    layout: "/portal/aluno",
+    layout: `${base}`,
   },
 ];
 export default routes;

@@ -1,8 +1,9 @@
+import { PageAppProps, SigningProps } from '@/@types/app';
+import api from '@/services/api';
 import Router from 'next/router';
 import { destroyCookie, setCookie } from 'nookies';
 import { createContext, useState } from 'react';
 import { toast } from 'react-toastify';
-import api from '~/services/api';
 
 
 export const AuthContext = createContext({});
@@ -14,7 +15,7 @@ export function signOut() {
   Router.replace('/acesso');
 }
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: PageAppProps) {
   const [user, setUser] = useState(null);
   const isAuthenticated = !!user;
   /* const {
@@ -26,7 +27,9 @@ export function AuthProvider({ children }) {
       setUser(JSON.parse(userCookie));
   }, []); */
 
-  async function signIn({ username, password, profile }) {
+
+
+  async function signIn({ username, password, profile }:SigningProps) {
     const toastId = toast.loading("Processando acesso...");
     try {
       const { data: {

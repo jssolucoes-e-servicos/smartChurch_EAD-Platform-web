@@ -8,20 +8,20 @@ const withPWA = require("next-pwa")({
 /** @type {import('next').NextConfig} */
 const nextConfig = withPWA({
   reactStrictMode: true,
-  /* async redirects() {
+  async redirects() {
     return [
       {
-        source: "/app",
-        destination: "/app/inicio",
+        source: "/acesso",
+        destination: "/acesso/aluno",
         permanent: false,
       },
       {
         source: "/login",
-        destination: "/",
+        destination: "/acesso",
         permanent: false,
       },
     ];
-  }, */
+  },
 });
 
 

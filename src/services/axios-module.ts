@@ -2,7 +2,7 @@ import axios from "axios";
 import { parseCookies } from "nookies";
 import { toast } from "react-toastify";
 
-export function getAPIClient(ctx) {
+export function getAPIClient(ctx?: any) {
   const { "SEAD-00": token } = parseCookies(ctx);
   const { "SEAD-01": profile } = parseCookies(ctx);
 
@@ -19,22 +19,22 @@ export function getAPIClient(ctx) {
   }
 
   api.interceptors.response.use(
-    function (response) {
+    function (response: any) {
       return response;
     },
-    function (error) {
+    function (error: any) {
       console.error(error);
       if (error.response.status === 401) {
         let destiny;
         switch (profile) {
           case "teacher":
-            destiny = '/acesso/professor';
+            destiny = "/acesso/professor";
             break;
           case "studant":
-            destiny = '/acesso/aluno';
+            destiny = "/acesso/aluno";
             break;
           case "cma":
-            destiny = '/matriculas/cma';
+            destiny = "/matriculas/cma";
           default:
             break;
         }

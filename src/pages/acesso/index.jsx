@@ -7,9 +7,9 @@ import {
   CRow,
 } from '@coreui/react'
 
-import AccessTemplate from "~/templates/AccessTemplate";
+import AccessTemplate from "@/templates/AccessTemplate";
 import { useRouter } from "next/router";
-import { withSSRGuest } from '~/utils/withGuest';
+import { withSSRGuest } from '@/utils/withGuest';
 
 export const getServerSideProps = withSSRGuest(async ctx => {
   return {

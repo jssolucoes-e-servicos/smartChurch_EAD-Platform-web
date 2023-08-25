@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { signOut } from "@/contexts/AuthContext";
 import Router from "next/router";
 import { parseCookies } from "nookies";
-import { signOut } from "~/contexts/AuthContext";
+import React, { useEffect } from "react";
 
 export default function Index() {
   const cookies = parseCookies();

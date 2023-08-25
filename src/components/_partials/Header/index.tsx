@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import DashboardCard from "@/components/DashboardCard";
+import { useState } from "react";
 import { Container, Row } from "reactstrap";
-import DashboardCard from "~/components/DashboardCard";
 
 export default function Header({ cards = null }) {
-  const [cardsData, setCardsData] = useState(null);
+  const [cardsData, setCardsData] = useState<any|null>(null);
 
   /*   useEffect(async () => {
        if (cards !== null) {
@@ -29,7 +28,7 @@ export default function Header({ cards = null }) {
           {cards !== null && (
             <Row>
               {cardsData !== null &&
-                cardsData.map((card, index) => {
+                cardsData.map(({card, index} : any) => {
                   return (
                     <DashboardCard key={`header-card-${index}`} data={card} />
                   );

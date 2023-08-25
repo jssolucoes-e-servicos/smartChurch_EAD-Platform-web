@@ -1,3 +1,8 @@
+import Header from "@/components/_partials/Header";
+import api from "@/services/api";
+import { getAPIClient } from "@/services/axios-module";
+import AlunoTemplate from "@/templates/AlunoTemplate";
+import { withSSRAuth } from "@/utils/withSSRAuth";
 import moment from "moment";
 import Link from "next/link";
 import { parseCookies } from "nookies";
@@ -11,11 +16,6 @@ import {
   Row,
   Table
 } from "reactstrap";
-import Header from "~/components/_partials/Header";
-import api from "~/services/api";
-import { getAPIClient } from "~/services/axios";
-import AlunoTemplate from "~/templates/AlunoTemplate";
-import { withSSRAuth } from "~/utils/withSSRAuth";
 
 export default function Courses({ userData, pageData }) {
   const [myClasses, setMyClasses] = useState(pageData.coursesList);
@@ -27,7 +27,7 @@ export default function Courses({ userData, pageData }) {
     const toastId = toast.loading("Consultando meus cursos...");
     setInfoLoad('Carregando...');
     try {
-      const { data } = await api.get(`ead/studants-on-classes/${userData.church.id}/by-studant/${userData.id}`);
+      const { data } = await api.get(`ead/courses/${userData.church.id}`);
 
       if (data.length > 0) {
         setMyClasses(data.class);
@@ -120,7 +120,7 @@ export const getServerSideProps = async ctx => {
   const apiClient = getAPIClient(ctx);
   const { "SEAD-02": userCookie } = parseCookies(ctx);
   const userData = JSON.parse(userCookie)
-  const { data } = await apiClient.get(`ead/studants-on-classes/${userData.church.id}/by-studant/${userData.id}`);
+  const { data } = await apiClient.get(`ead/courses/${userData.Church.id}`);
   console.log(data);
   const pageData = {
     coursesList: data

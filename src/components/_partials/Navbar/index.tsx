@@ -1,6 +1,7 @@
 import Link from "next/link";
-import React, { useContext } from "react";
+import { useContext } from "react";
 // reactstrap components
+import { AuthContext, signOut } from "@/contexts/AuthContext";
 import md5 from "md5";
 import {
   Container,
@@ -12,9 +13,8 @@ import {
   Navbar,
   UncontrolledDropdown,
 } from "reactstrap";
-import { AuthContext, signOut } from "~/contexts/AuthContext";
 
-function AdminNavbar({ brandText, userData }) {
+function AdminNavbar({ brandText, userData }: any) {
   const context = useContext(AuthContext);
 
   return (

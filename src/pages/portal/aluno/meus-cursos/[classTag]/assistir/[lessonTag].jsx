@@ -1,21 +1,19 @@
-import React, { useState, useRef } from "react";
-import Router, { useRouter } from 'next/router';
+import VideoPlayerYoutube from "@/components/VideoPlayerYoutube/index";
+import Header from "@/components/_partials/Header";
+import api from "@/services/api";
+import { getAPIClient } from "@/services/axios-module";
+import AlunoTemplate from "@/templates/AlunoTemplate";
+import { withSSRAuth } from "@/utils/withSSRAuth";
+import { useRouter } from 'next/router';
+import { parseCookies } from "nookies";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  Container,
-  Row,
+  Container
 } from "reactstrap";
-import { parseCookies } from "nookies";
-import { toast } from "react-toastify";
-import AlunoTemplate from "~/templates/AlunoTemplate";
-import Header from "~/components/_partials/Header";
-import { withSSRAuth } from "~/utils/withSSRAuth";
-import api from "~/services/api";
-import { getAPIClient } from "~/services/axios";
-import VideoPlayerYoutube from "~/components/VideoPlayerYoutube/index";
 
 export default function MyLessonsByClass({ userData, pageData }) {
   const router = useRouter();
@@ -27,7 +25,7 @@ export default function MyLessonsByClass({ userData, pageData }) {
     const toastId = toast.loading("atualizando chat");
     setInfoLoad('Carregando...');
     try {
-      const { data } = await api.get(`courses-lessons/find-by-tag/${lessonTag}`);
+      const { data } = await api.get(`ead/courses-lessons/${userData.Church.id}/find-by-tag/${userData.id}/${lessonTag}`);
       if (data) {
         setInfoLoad('Nenhum registro');
       } else {
@@ -47,7 +45,7 @@ export default function MyLessonsByClass({ userData, pageData }) {
     const toastId = toast.loading("atualizando anexos");
     setInfoLoad('Carregando...');
     try {
-      const { data } = await api.get(`courses-lessons/find-by-tag/${lessonTag}`);
+      const { data } = await api.get(`ead/courses-lessons/${userData.Church.id}/find-by-tag/${userData.id}/${lessonTag}`);
       if (data) {
         setInfoLoad('Nenhum registro');
       } else {
@@ -69,7 +67,7 @@ export default function MyLessonsByClass({ userData, pageData }) {
       <Container className="mt--6" fluid>
         <Card className="shadow">
           <CardBody className="mt-3">
-            {pageData.lessonData.videoPlatform === 'youtube' ? (
+            {pageData.lessonData.videoPlatform === 'YOUTUBE' ? (
               <VideoPlayerYoutube data={pageData.lessonData} />
             ) : (<h3>Falha ao carregar</h3>)}
           </CardBody>
@@ -89,7 +87,8 @@ export const getServerSideProps = async ctx => {
   const apiClient = getAPIClient(ctx);
   const { "SEAD-02": userCookie } = parseCookies(ctx);
   const userData = JSON.parse(userCookie)
-  const { data } = await apiClient.get(`courses-lessons/find-by-tag/${lessonTag}`);
+
+  const { data } = await apiClient.get(`ead/courses-lessons/${userData.Church.id}/find-by-tag/${userData.id}/${lessonTag}`);
   const pageData = {
     userCookie: userData,
     lessonData: data

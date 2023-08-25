@@ -1,6 +1,6 @@
 import { parseCookies } from "nookies";
 
-export function withSSRGuest(ctx) {
+export function withSSRGuest(ctx: any) {
   const { "SEAD-00": token, "SEAD-01": profile } = parseCookies(ctx);
   if (token) {
     if (profile === "teacher") {

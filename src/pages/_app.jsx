@@ -1,12 +1,12 @@
+import { AuthProvider } from '@/contexts/AuthContext';
+import '@/styles/ReactToastify.css';
 import Head from "next/head";
 import React, { useEffect } from "react";
 import { ToastContainer } from 'react-toastify';
-import { AuthProvider } from '~/contexts/AuthContext';
-import '../styles/ReactToastify.css';
 
+import "@/assets/css/nextjs-argon-dashboard.css";
+import "@/assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "~/assets/css/nextjs-argon-dashboard.css";
-import "~/assets/plugins/nucleo/css/nucleo.css";
 
 export default function MyApp({ Component, pageProps }) {
 

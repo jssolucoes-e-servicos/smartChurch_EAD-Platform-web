@@ -1,28 +1,27 @@
 /*eslint-disable*/
-import React from "react";
-import Link from "next/link";
+import { SidebarRouteProps } from "@/@types/app";
 import { useRouter } from "next/router";
+import React from "react";
 // nodejs library to set properties for components
-import { PropTypes } from "prop-types";
 
 // reactstrap components
 import {
+  Col,
   Collapse,
-  NavbarBrand,
-  Navbar,
+  Container,
+  Nav,
   NavItem,
   NavLink,
-  Nav,
-  Container,
+  Navbar,
+  NavbarBrand,
   Row,
-  Col,
 } from "reactstrap";
 
-export default function Sidebar({ routes, logo }) {
+export default function Sidebar({ routes, logo }:any) {
   const router = useRouter();
   const [collapseOpen, setCollapseOpen] = React.useState(false);
 
-  const activeRoute = (routeName) => {
+  const activeRoute = (routeName: any) => {
     return router.route.indexOf(routeName) > -1;
   };
   const toggleCollapse = () => {
@@ -33,8 +32,8 @@ export default function Sidebar({ routes, logo }) {
     setCollapseOpen(false);
   };
 
-  const createLinks = (routes) => {
-    return routes.map((prop, key) => {
+  const createLinks = (routes :SidebarRouteProps[]) => {
+    return routes.map((prop :SidebarRouteProps, key:number) => {
       return (
         <NavItem key={key} active={activeRoute(prop.layout + prop.path)}>
 

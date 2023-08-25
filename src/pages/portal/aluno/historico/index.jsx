@@ -1,11 +1,11 @@
+import FutureImplementation from "@/components/FutureImplementetion/index";
+import Header from "@/components/_partials/Header";
+import { getAPIClient } from "@/services/axios-module";
+import AlunoTemplate from "@/templates/AlunoTemplate";
+import { withSSRAuth } from "@/utils/withSSRAuth";
 import { parseCookies } from "node_modules/nookies/dist/index";
 import React from "react";
 import { Container, } from "reactstrap";
-import FutureImplementation from "~/components/FutureImplementetion/index";
-import Header from "~/components/_partials/Header";
-import { getAPIClient } from "~/services/axios";
-import AlunoTemplate from "~/templates/AlunoTemplate";
-import { withSSRAuth } from "~/utils/withSSRAuth";
 
 export default function Page({ userData, pageData }) {
   return (

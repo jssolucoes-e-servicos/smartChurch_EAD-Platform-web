@@ -11,9 +11,9 @@ import {
   Row,
   Table
 } from "reactstrap";
-import Header from "~/components/_partials/Header";
-import AlunoTemplate from "~/templates/AlunoTemplate";
-import { withSSRAuth } from "~/utils/withSSRAuth";
+import Header from "@/components/_partials/Header";
+import AlunoTemplate from "@/templates/AlunoTemplate";
+import { withSSRAuth } from "@/utils/withSSRAuth";
 export default function Page({ userData, pageData }) {
   const [activeNav, setActiveNav] = useState(1);
   const [evaluations, setEvaluations] = useState([]);

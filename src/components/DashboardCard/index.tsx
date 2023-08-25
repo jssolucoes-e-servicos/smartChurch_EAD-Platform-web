@@ -1,7 +1,12 @@
-import React from 'react';
-import { Card, CardBody, CardTitle, Row, Col } from "reactstrap";
+import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
-export default function DashboardCard({ data }) {
+type DashboardCardType = {
+  data: {
+    title: string,
+    value: string
+  }
+}
+export default function DashboardCard({ data }: DashboardCardType) {
   return (
     <Col lg="6" xl="3">
       <Card className="card-stats mb-4 mb-xl-0">

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   Button,
   Card,
   CardHeader,
-  Table,
   Row,
+  Table,
 } from "reactstrap";
 
-const MessagesList = ({ messagesTransport = [] }) => {
+const MessagesList = ({ messagesTransport = [] } : any) => {
   const [messages, setMessages] = useState(messagesTransport)
   const [infoLoad, setInfoLoad] = useState('Nenhum registro');
 

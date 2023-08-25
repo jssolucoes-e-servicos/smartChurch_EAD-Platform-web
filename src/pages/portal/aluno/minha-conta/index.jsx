@@ -1,21 +1,21 @@
+import HeaderUser from "@/components/_partials/HeaderUser";
+import { getAPIClient } from "@/services/axios-module";
+import AlunoTemplate from "@/templates/AlunoTemplate";
+import { withSSRAuth } from "@/utils/withSSRAuth";
+import { parseCookies } from "nookies";
 import React from "react";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
+  CardHeader,
   Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Row,
 } from "reactstrap";
-import AlunoTemplate from "~/templates/AlunoTemplate";
-import HeaderUser from "~/components/_partials/HeaderUser";
-import { withSSRAuth } from "~/utils/withSSRAuth";
-import { getAPIClient } from "~/services/axios";
-import { parseCookies } from "nookies";
 
 export default function Profile({ userData }) {
   return (

@@ -16,10 +16,10 @@ import {
   Row,
   Table
 } from "reactstrap";
-import Header from "~/components/_partials/Header";
-import api from "~/services/api";
-import CMATemplate from "~/templates/CMATemplate";
-import { withSSRAuth } from "~/utils/withSSRAuth";
+import Header from "@/components/_partials/Header";
+import api from "@/services/api";
+import CMATemplate from "@/templates/CMATemplate";
+import { withSSRAuth } from "@/utils/withSSRAuth";
 
 export default function DashboardCMA({ userData }) {
   const { register, handleSubmit, formState } = useForm();

@@ -1,36 +1,31 @@
-import React, { useState, useRef, Fragment, useEffect } from 'react';
+import VideoDuration from '@/components/VideoDaration';
+import VideoDescription from '@/components/VideoDescription';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText,
   CardFooter,
-  Table,
-  Container,
-  Row,
-  Progress,
+  CardSubtitle,
+  CardTitle,
   Input,
+  Progress
 } from "reactstrap";
-import VideoDuration from '~/components/VideoDaration';
-import VideoDescription from '~/components/VideoDescription';
 //import screenfull from 'screenfull';
 
 
-export default function VideoPlayerYoutube({ data }) {
+export default function VideoPlayerYoutube({ data }:any) {
   const [playing, setPlaying] = useState(false);
   const [videoDuration, setVideoDuration] = useState(0);
   const [played, setPlayed] = useState(0);
   const [volume, setVolume] = useState(0.2);
 
-  const ref = useRef(null);
+  const ref = useRef<any|null>(null);
 
   useEffect(() => {
     setPlayed(0);
-    ref.current.seekTo(parseFloat(0));
+    ref?.current?.seekTo(parseFloat(0));
   }, []);
 
 
@@ -65,7 +60,7 @@ export default function VideoPlayerYoutube({ data }) {
     if (played > 0) { setPlayed(0); ref.current.seekTo(parseFloat(0)) }
   }
 
-  const handleDuration = (duration) => {
+  const handleDuration = (duration:any) => {
     ref.current.seekTo(parseFloat(0))
     setVideoDuration(duration);
   }
@@ -139,13 +134,25 @@ export default function VideoPlayerYoutube({ data }) {
                 color={!playing ? "primary" : "danger"}
                 className="mt-2"
                 onClick={changePlaying}
-                block="true"
+                block={true}
               >{playing ? 'Pausar' : 'Assistir'}</Button>
             </CardFooter>
           </CardBody>
         </Card>
       </Fragment>
     );
+  }
+
+  const youtubeConfigs = {
+    youtube: {
+      playerVars: {
+        showinfo: 0,
+        autoplay: 1,
+        disablekb: 1,
+        modestbranding: 1,
+        rel: 0,
+      }
+    },
   }
 
   return (
@@ -171,17 +178,7 @@ export default function VideoPlayerYoutube({ data }) {
 
               width='100%'
               height='450px'
-              config={{
-                youtube: {
-                  playerVars: {
-                    showinfo: 0,
-                    autoplay: 1,
-                    disablekb: 1,
-                    modestbranding: 1,
-                    rel: 0,
-                  }
-                },
-              }}
+              //config={youtubeConfigs}
 
             />
             <div className='col-xl-12'>

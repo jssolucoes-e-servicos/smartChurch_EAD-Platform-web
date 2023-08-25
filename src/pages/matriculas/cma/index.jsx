@@ -2,9 +2,9 @@ import React from "react";
 import {
   Container,
 } from "reactstrap";
-import CMATemplate from "~/templates/CMATemplate";
-import Header from "~/components/_partials/Header";
-import { withSSRAuth } from "~/utils/withSSRAuth";
+import CMATemplate from "@/templates/CMATemplate";
+import Header from "@/components/_partials/Header";
+import { withSSRAuth } from "@/utils/withSSRAuth";
 import { parseCookies } from "nookies";
 
 export default function DashboardCMA({ pageData, userData }) {

@@ -1,4 +1,4 @@
-import React from "react";
+import { PageLayoutProps } from '@/@types/app';
 import {
   CCard,
   CCardBody,
@@ -6,9 +6,9 @@ import {
   CCol,
   CContainer,
   CRow,
-} from '@coreui/react'
+} from '@coreui/react';
 
-function AccessTemplate({ children }) {
+export default function AccessTemplate({children,userData}: PageLayoutProps) {
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -27,7 +27,7 @@ function AccessTemplate({ children }) {
                     src="/assets/images/smartEAD-2.png"
                     height={200}
                     style={{
-                      boxShadow: 10
+                      boxShadow: '10'
                     }}
                   ></img>
                 </CCardBody>
@@ -39,5 +39,3 @@ function AccessTemplate({ children }) {
     </div>
   );
 }
-
-export default AccessTemplate;

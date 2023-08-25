@@ -1,23 +1,17 @@
-import React from "react";
 import { useRouter } from "next/router";
+import React from "react";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import AdminNavbar from "~/partials/Navbar";
-import AdminFooter from "~/partials/Footer";
-import Sidebar from "~/partials/Sidebar";
+import AdminFooter from "@/components/_partials/Footer";
+import AdminNavbar from "@/components/_partials/Navbar";
+import Sidebar from "@/components/_partials/Sidebar";
 
-import routes from "~/configs/routes/cma";
+import { PageLayoutProps } from "@/@types/app";
+import routes from "@/configs/routes/aluno";
 
-export default function CMATemplate(props) {
+export default function AlunoTemplate({children,userData}: PageLayoutProps) {
   const router = useRouter();
-
-  let mainContentRef = React.createRef();
-  React.useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    mainContentRef.current.scrollTop = 0;
-  }, []);
 
   const getBrandText = () => {
     for (let i = 0; i < routes.length; i++) {
@@ -31,17 +25,17 @@ export default function CMATemplate(props) {
   return (
     <React.Fragment>
       <Sidebar
-        {...props}
+        /* {...props} */
         routes={routes}
         logo={{
-          link: "/matriculas/cma",
+          link: "/portal/aluno",
           imgSrc: "/assets/images/smartEAD-1.png",
           imgAlt: "smartEAD",
         }}
       />
-      <div className="main-content" ref={mainContentRef}>
-        <AdminNavbar {...props} brandText={getBrandText()} userData={props.userData} />
-        {props.children}
+      <div className="main-content">
+        <AdminNavbar /* {...props} */ brandText={getBrandText()} userData={userData} />
+        {children}
         <Container fluid>
           <AdminFooter />
         </Container>

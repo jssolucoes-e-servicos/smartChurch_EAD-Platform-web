@@ -1,9 +1,8 @@
-import React, { useState } from "react";
 import {
   Pagination, PaginationItem, PaginationLink
 } from "reactstrap";
 
-export default function PaginationComponent(props) {
+export default function PaginationComponent(props:any) {
   return (
     <Pagination aria-label="Page navigation example">
       <PaginationItem disabled>

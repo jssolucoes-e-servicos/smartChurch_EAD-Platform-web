@@ -9,9 +9,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useContext } from "react";
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { AuthContext } from '~/contexts/AuthContext';
-import AccessTemplate from "~/templates/AccessTemplate";
-import { withSSRGuest } from '~/utils/withGuest';
+import { AuthContext } from '@/contexts/AuthContext';
+import AccessTemplate from "@/templates/AccessTemplate";
+import { withSSRGuest } from '@/utils/withGuest';
 
 
 const signInFormSchema = yup.object().shape({

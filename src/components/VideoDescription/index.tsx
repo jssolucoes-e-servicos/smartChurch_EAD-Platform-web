@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
+import md5 from "md5";
+import { Fragment } from 'react';
 import {
   Card,
-  CardTitle,
   CardSubtitle,
+  CardTitle,
 } from "reactstrap";
-import md5 from "md5";
 
-export default function VideoDescription({ data }) {
+export default function VideoDescription({ data }:any) {
   return (
     <Fragment>
       <div className='ml-2 mt-2'>
@@ -20,11 +20,11 @@ export default function VideoDescription({ data }) {
             <picture>
               {data.teacher.person.photo !== null ? (
                 <img src={data.teacher.person.email}
-                  class="rounded-circle" alt={data.teacher.person.name} />
+                  className="rounded-circle" alt={data.teacher.person.name} />
               ) : (
                 <img src={`https://www.gravatar.com/avatar/${md5(
                   data.teacher.person.email)}`}
-                  class="rounded-circle" alt={data.teacher.person.name} />
+                  className="rounded-circle" alt={data.teacher.person.name} />
               )}
             </picture>
           </div>
