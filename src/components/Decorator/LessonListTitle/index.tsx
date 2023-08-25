@@ -9,7 +9,7 @@ type LessonListTitleType = {
 
 export default function LessonListTitle({ tag, data }: LessonListTitleType) {
   const router = useRouter();
-  const handleLesson = (data) => {
+  const handleLesson = (data: any) => {
     toast.info(`Abrindo aula: ${data.lesson.name}`);
     router.push(`/portal/aluno/meus-cursos/${tag}/assistir/${data.lesson.slug}`);
   }

@@ -25,7 +25,7 @@ export default function VideoPlayerYoutube({ data }:any) {
 
   useEffect(() => {
     setPlayed(0);
-    ref?.current?.seekTo(parseFloat(0));
+    ref?.current?.seekTo(parseFloat('0'));
   }, []);
 
 
@@ -47,7 +47,7 @@ export default function VideoPlayerYoutube({ data }:any) {
     }
   }
 
-  const handleVolumeChange = e => {
+  const handleVolumeChange = (e:any) => {
     setVolume(parseFloat(e.target.value));
   }
 
@@ -57,11 +57,11 @@ export default function VideoPlayerYoutube({ data }:any) {
   }
 
   const handleOnStart = () => {
-    if (played > 0) { setPlayed(0); ref.current.seekTo(parseFloat(0)) }
+    if (played > 0) { setPlayed(0); ref.current.seekTo(parseFloat('0')) }
   }
 
   const handleDuration = (duration:any) => {
-    ref.current.seekTo(parseFloat(0))
+    ref.current.seekTo(parseFloat('0'))
     setVideoDuration(duration);
   }
 
@@ -69,7 +69,7 @@ export default function VideoPlayerYoutube({ data }:any) {
      screenfull.request(findDOMNode(ref));
    } */
 
-  const handleProgress = state => {
+  const handleProgress = (state:any) => {
     setPlayed(state.played);
   }
 

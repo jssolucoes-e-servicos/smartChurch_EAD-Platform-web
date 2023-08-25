@@ -60,7 +60,7 @@ const MessagesList = ({ messagesTransport = [] } : any) => {
         <tbody>
           {
             messages.length > 0 ? (
-              messages.map(message => {
+              messages.map((message: any) => {
                 return (
                   <tr key={`message-${message.id}`}>
                     <td>{message.origin}</td>
