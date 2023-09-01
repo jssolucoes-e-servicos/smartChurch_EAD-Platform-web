@@ -1,4 +1,4 @@
-const base = "/portal/aluno";
+const base = "/ava";
 const routes = [
   {
     path: "/",

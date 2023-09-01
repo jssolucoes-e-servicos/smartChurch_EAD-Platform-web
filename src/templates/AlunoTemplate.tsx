@@ -28,7 +28,7 @@ export default function AlunoTemplate({children,userData}: PageLayoutProps) {
         /* {...props} */
         routes={routes}
         logo={{
-          link: "/portal/aluno",
+          link: "/ava",
           imgSrc: "/assets/images/smartEAD-1.png",
           imgAlt: "smartEAD",
         }}

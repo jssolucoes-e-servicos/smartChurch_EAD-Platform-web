@@ -13,3 +13,4 @@ yarn.lock
 next.config.original.js
 
 /.vscode
+yarn.lock

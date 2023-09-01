@@ -8,7 +8,7 @@ import {
   CRow,
 } from '@coreui/react';
 
-export default function AccessTemplate({children,userData}: PageLayoutProps) {
+export default function AccessTemplate({children, userData}: PageLayoutProps) {
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -16,11 +16,6 @@ export default function AccessTemplate({children,userData}: PageLayoutProps) {
         <CRow className="justify-content-center">
           <CCol md={8}>
             <CCardGroup>
-              <CCard className="p-4">
-                <CCardBody>
-                  {children}
-                </CCardBody>
-              </CCard>
               <CCard className="text-white bg-dark py-5" >
                 <CCardBody className="text-center">
                   <img
@@ -30,6 +25,11 @@ export default function AccessTemplate({children,userData}: PageLayoutProps) {
                       boxShadow: '10'
                     }}
                   ></img>
+                </CCardBody>
+              </CCard>
+              <CCard className="p-4">
+                <CCardBody>
+                  {children}
                 </CCardBody>
               </CCard>
             </CCardGroup>

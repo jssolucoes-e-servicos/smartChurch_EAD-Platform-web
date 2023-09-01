@@ -1,7 +1,7 @@
 import { signOut } from "@/contexts/AuthContext";
 import Router from "next/router";
 import { parseCookies } from "nookies";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Index() {
   const cookies = parseCookies();
@@ -21,20 +21,22 @@ export default function Index() {
           redirToAccess();
         } else {
           if (profileCookie === 'teacher') {
-            Router.replace("/portal/professor/");
+            Router.replace("/admin");
           } else if (profileCookie === 'studant') {
-            Router.replace("/portal/aluno/");
+            Router.replace("/ava");
           } else {
             redirToAccess();
           }
         }
       }
+    } else {
+      Router.replace("/ava/meus-cursos");
     }
   });
 
   const redirToAccess = () => {
     signOut();
-    Router.replace("/acesso");
+    Router.replace("/ava/login");
   }
 
   return <div />;

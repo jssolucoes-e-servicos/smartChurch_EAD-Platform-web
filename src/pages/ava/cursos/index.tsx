@@ -66,48 +66,7 @@ export default function Courses({ userData, pageData }) {
               </div>
             </Row>
           </CardHeader>
-          <Table className="align-items-center table-flush table-strip" responsive>
-            <thead className="thead-light">
-              <tr>
-                <th scope="col">Curso</th>
-                <th scope="col">Turma</th>
-                <th scope="col">Total de Aulas</th>
-                <th scope="col">Realizado</th>
-                <th scope="col">Matriculado em</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                myClasses ? (
-                  myClasses.map(item => {
-                    /*  let realizeds = 0;
-                     item.class.course.CourseLesson.map(lesson=>{
-                       if lesson.
-                     }); */
-                    return (
-                      <tr key={`item-${item.id}`}>
-                        <td><Link href={`/portal/aluno/meus-cursos/${item.class.slug}`}>{item.class.course.name}</Link></td>
-                        <td>{item.class.name}</td>
-                        <td>{item.class.course.CourseLesson.length}</td>
-                        <td>{`<< Não Calculado >>`}</td>
-                        <td> {moment(item.createdAt).format('DD/MM/YYYY')}</td>
-                      </tr>
-                    )
-                  })
-                ) : (
-                  <tr>
-                    <td className={`text-${infoLoad === 'Nenhum registro' ? 'danger' : 'primary'
-                      } pl-5 pt-2`}>
-                      {infoLoad}
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                )
-              }
-            </tbody>
-          </Table>
+          <MyCoursesTable data={MyClasses}>
         </Card>
       </Container>
     </AlunoTemplate>

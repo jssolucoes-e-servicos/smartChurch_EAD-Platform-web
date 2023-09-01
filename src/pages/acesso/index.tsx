@@ -5,21 +5,21 @@ import {
   CFormInput,
   CRow,
 } from '@coreui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useContext } from "react";
+
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { AuthContext } from '@/contexts/AuthContext';
 import AccessTemplate from "@/templates/AccessTemplate";
 import { withSSRGuest } from '@/utils/withGuest';
 
-
 const signInFormSchema = yup.object().shape({
   username: yup.string().required('Username / Email obrigatório'),
   password: yup.string().required('Senha obrigatória')
 });
 
-export default function AccessTeacher() {
+export default function StudantAccess() {
   const { signIn } = useContext(AuthContext);
 
   const { register, handleSubmit, formState } = useForm({
@@ -35,19 +35,25 @@ export default function AccessTeacher() {
   return (
     <AccessTemplate>
       <CForm onSubmit={handleSubmit(handleSignIn)}>
-        <h1>Portal do Professor</h1>
+        <h1>Portal do Aluno</h1>
         <p className="text-medium-emphasis">Identifique-se</p>
-        <input type="hidden" {...register('profile')} value="teacher" />
+        <input type="hidden" {...register('profile')} value="studant" />
         <CFormInput
-          className="mb-4" placeholder="Seu Usuário" autoComplete="username" {...register('username')}
-          error={errors.username} />
+          className="mb-4"
+          autoComplete="username"
+          placeholder="Seu usuário"
+          {...register('username')}
+          error={errors.username}
+        //value="jackson"
+        />
         <CFormInput
           className="mb-4"
           type="password"
-          placeholder="Senha"
           autoComplete="current-password"
+          placeholder="Sua Senha"
           {...register('password')}
           error={errors.password}
+        //value="522576"
         />
 
         <CRow>

@@ -6,14 +6,21 @@ export function withSSRGuest(ctx: any) {
     if (profile === "teacher") {
       return {
         redirect: {
-          destination: "/portal/professor",
+          destination: "/admin",
+          permanent: false,
+        },
+      };
+    }if (profile === "cma") {
+      return {
+        redirect: {
+          destination: "/matriculas/cma",
           permanent: false,
         },
       };
     } else {
       return {
         redirect: {
-          destination: "/portal/aluno",
+          destination: "/ava",
           permanent: false,
         },
       };

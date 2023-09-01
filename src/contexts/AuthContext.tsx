@@ -12,7 +12,7 @@ export function signOut() {
   destroyCookie(undefined, 'SEAD-00');
   destroyCookie(undefined, 'SEAD-01');
   destroyCookie(undefined, 'SEAD-02');
-  Router.replace('/acesso');
+  Router.replace('/');
 }
 
 export function AuthProvider({ children }: PageAppProps) {
@@ -58,10 +58,10 @@ export function AuthProvider({ children }: PageAppProps) {
       setUser(dbUser);
       switch (profile) {
         case "teacher":
-          Router.push('/portal/professor');
+          Router.push('/admin');
           break;
         case "studant":
-          Router.push('/portal/aluno');
+          Router.push('/ava');
           break;
         case "cma":
           Router.push('/matriculas/cma');
