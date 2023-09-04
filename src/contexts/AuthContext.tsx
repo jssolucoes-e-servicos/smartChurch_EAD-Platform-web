@@ -61,7 +61,7 @@ export function AuthProvider({ children }: PageAppProps) {
           Router.push('/admin');
           break;
         case "studant":
-          Router.push('/ava');
+          Router.push('/ava/meus-cursos');
           break;
         case "cma":
           Router.push('/matriculas/cma');

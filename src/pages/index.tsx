@@ -23,14 +23,12 @@ export default function Index() {
           if (profileCookie === 'teacher') {
             Router.replace("/admin");
           } else if (profileCookie === 'studant') {
-            Router.replace("/ava");
+            Router.replace("/ava/meus-cursos");
           } else {
             redirToAccess();
           }
         }
       }
-    } else {
-      Router.replace("/ava/meus-cursos");
     }
   });
 
